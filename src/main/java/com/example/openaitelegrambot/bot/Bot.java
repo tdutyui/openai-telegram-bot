@@ -54,7 +54,7 @@ public class Bot extends TelegramLongPollingBot {
         return TOKEN;
     }
     
-    public void sendText(Long userId, String text) {
+    private void sendText(Long userId, String text) {
         SendMessage sm = SendMessage.builder()
                 .chatId(userId.toString())
                 .text(text).build();
