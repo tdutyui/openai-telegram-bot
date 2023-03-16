@@ -46,7 +46,7 @@ jobs:
     - name: Move jar to directory
       shell: bash
       run: |
-        mv openai-telegram-bot-0.0.1-SNAPSHOT.jar /src/
+        mv openai-telegram-bot-0.0.1-SNAPSHOT.jar .
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
