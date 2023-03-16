@@ -1,6 +1,7 @@
 FROM openjdk:19-jdk-alpine
 
-COPY . /app
+WORKDIR /opt
+COPY ./target /opt
 
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app/src/openai-telegram-bot-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/opt/openai-telegram-bot-0.0.1-SNAPSHOT.jar"]
