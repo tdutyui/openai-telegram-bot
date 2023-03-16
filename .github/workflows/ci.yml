@@ -8,6 +8,10 @@
 
 name: Java CI with Maven
 
+env:
+  BOT_TOKEN: 'BOT_TOKEN'
+  BOT_USERNAME: 'BOT_USERNAME'
+
 on:
   push:
     branches: [ "master" ]
