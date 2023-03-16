@@ -33,6 +33,11 @@ jobs:
         path: staging
 
   docker:
+
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
     - name: Download artifact
       uses: actions/download-artifact@v3
 
