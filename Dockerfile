@@ -5,6 +5,7 @@ COPY mvnw .
 COPY pom.xml .
 COPY src src
 
+RUN chmod +x mvnw
 RUN ./mvnw -B package
 
 FROM openjdk:19-jdk-alpine
