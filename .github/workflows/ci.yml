@@ -26,6 +26,15 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - run: mkdir staging && cp target/*.jar staging
+    - uses: actions/upload-artifact@v3
+      with:
+        name: jar
+        path: staging
+
+  docker:
+    - name: Download artifact
+      uses: actions/download-artifact@v3
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
