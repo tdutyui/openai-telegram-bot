@@ -40,6 +40,8 @@ jobs:
     steps:
     - name: Download artifact
       uses: actions/download-artifact@v3
+      with:
+        name: jar
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
