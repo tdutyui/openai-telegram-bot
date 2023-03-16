@@ -1,19 +1,16 @@
 package com.example.openaitelegrambot.bot;
 
+import com.example.openaitelegrambot.button.Buttons;
 import com.example.openaitelegrambot.client.ChatClient;
 import com.example.openaitelegrambot.client.ImageClient;
 import com.example.openaitelegrambot.exception.MessageSendException;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-@Getter
-@Setter
 @Component
 @RequiredArgsConstructor
 public class Bot extends TelegramLongPollingBot {
@@ -29,19 +26,7 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         String message = update.getMessage().getText();
         Long userId = update.getMessage().getFrom().getId();
-        if (message.equals("/image")) {
-            sendText(userId, "Send text to generate image");
-            isChat = false;
-            return;
-        }
-        if (message.equals("/chat")) {
-            sendText(userId, "Let's chat!");
-            isChat = true;
-        } else if (isChat) {
-            sendText(userId, chatClient.createChatCompletion(message));
-        } else {
-            sendText(userId, imageClient.createImage(message));
-        }
+        processReceivedMessage(message, userId);
     }
     
     @Override
@@ -57,11 +42,41 @@ public class Bot extends TelegramLongPollingBot {
     private void sendText(Long userId, String text) {
         SendMessage sm = SendMessage.builder()
                 .chatId(userId.toString())
-                .text(text).build();
+                .text(text)
+                .build();
         try {
             execute(sm);
         } catch (TelegramApiException e) {
             throw new MessageSendException(e.getMessage());
+        }
+    }
+    
+    private void sendTextOnStart(Long userId) {
+        SendMessage sm = SendMessage.builder()
+                .chatId(userId.toString())
+                .text("Hello! Choose what do you want to do")
+                .replyMarkup(Buttons.replyKeyboardMarkup())
+                .build();
+        try {
+            execute(sm);
+        } catch (TelegramApiException e) {
+            throw new MessageSendException(e.getMessage());
+        }
+    }
+    
+    private void processReceivedMessage(String message, Long userId) {
+        if (message.equals("DALL-E")) {
+            sendText(userId, "Send text to generate image");
+            isChat = false;
+        } else if (message.equals("ChatGPT")) {
+            sendText(userId, "Let's chat!");
+            isChat = true;
+        } else if (message.equals("/start")) {
+            sendTextOnStart(userId);
+        } else if (isChat) {
+            sendText(userId, chatClient.createChatCompletion(message));
+        } else {
+            sendText(userId, imageClient.createImage(message));
         }
     }
 }
