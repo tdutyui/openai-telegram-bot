@@ -4,6 +4,7 @@ COPY .mvn .mvn
 COPY mvnw .
 COPY pom.xml .
 COPY src src
+COPY Dockerfile .
 
 RUN chmod +x mvnw
 RUN ./mvnw -B package

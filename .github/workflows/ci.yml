@@ -46,7 +46,13 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build and push
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        BOT_USERNAME: ${{ secrets.BOT_USERNAME }}
       uses: docker/build-push-action@v4
       with:
         push: true
         tags: tdutyui/openai-telegram-bot:latest
+        build-args: |
+          BOT_TOKEN=$BOT_TOKEN
+          BOT_USERNAME=$BOT_USERNAME
