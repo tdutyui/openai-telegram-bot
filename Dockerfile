@@ -1,6 +1,6 @@
 FROM openjdk:19-jdk-alpine
 
-WORKDIR . /app
+COPY . /app
 
 RUN ./mvnw -B package
 
