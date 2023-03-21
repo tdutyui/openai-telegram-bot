@@ -27,10 +27,10 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - id: 'auth'
-          uses: 'google-github-actions/auth@v1'
-          with:
-            service_account: ${{ secrets.SERVICE_ACCOUNT }}
+      - name: auth
+        uses: google-github-actions/auth@v1
+        with:
+          service_account: ${{ secrets.SERVICE_ACCOUNT }}
 
-            - id: 'deploy'
-              uses: 'google-github-actions/deploy-appengine@v1'
+      - name: deploy
+        uses: google-github-actions/deploy-appengine@v1
