@@ -3,6 +3,7 @@ name: Java CI with Maven
 env:
   BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
   BOT_USERNAME: ${{ secrets.BOT_USERNAME }}
+  SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
 
 on:
   push:
@@ -30,7 +31,7 @@ jobs:
       - name: auth
         uses: google-github-actions/auth@v1
         with:
-          service_account: ${{ secrets.SERVICE_ACCOUNT }}
+          credentials_json: SERVICE_ACCOUNT
 
       - name: deploy
         uses: google-github-actions/deploy-appengine@v1
