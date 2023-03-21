@@ -31,7 +31,7 @@ jobs:
       - name: auth
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: SERVICE_ACCOUNT
+          service_account: SERVICE_ACCOUNT
 
       - name: deploy
         uses: google-github-actions/deploy-appengine@v1
