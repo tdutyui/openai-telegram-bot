@@ -37,7 +37,7 @@ jobs:
         uses: google-github-actions/auth@v1
         with:
           workload_identity_provider: WORKLOAD_IDENTITY
-          service_account: SERVICE_ACCOUNT
+          service_account: openai-telegram-bot-381311@openai-telegram-bot-381311.iam.gserviceaccount.com
 
       - name: deploy
         uses: google-github-actions/deploy-appengine@v1
