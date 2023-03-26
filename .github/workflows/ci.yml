@@ -4,6 +4,7 @@ env:
   BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
   BOT_USERNAME: ${{ secrets.BOT_USERNAME }}
   SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+  WORKLOAD_IDENTITY: ${{ secrets.WORKLOAD_IDENTITY }}
 
 on:
   push:
@@ -31,6 +32,7 @@ jobs:
       - name: auth
         uses: google-github-actions/auth@v1
         with:
+          workload_identity_provider: WORKLOAD_IDENTITY
           service_account: SERVICE_ACCOUNT
 
       - name: deploy
