@@ -1,0 +1,5 @@
+runtime: java19
+
+env_variables:
+  BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+  BOT_USERNAME: ${{ secrets.BOT_USERNAME }}
